@@ -1,0 +1,20 @@
+{
+  "name": "plugin-boilerplate",
+  "version": "0.0.1",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Marko Nikolaš",
+  "license": "GPL-2.0-only",
+  "description": "Plugin boilerplate description.",
+  "devDependencies": {
+		"@wordpress/env": "^10.23.0"
+  },
+  "scripts": {
+		"wp-env": "wp-env",
+		"composer": "wp-env run cli --env-cwd=wp-content/plugins/$(basename \"$PWD\") composer",
+		"test:setup": "yarn wp-env start",
+		"test:teardown": "yarn wp-env stop",
+		"test:unit": "yarn test:setup && yarn test:php:unit ; yarn test:teardown",
+		"test:php:unit": "yarn composer test:unit"
+  }
+}
