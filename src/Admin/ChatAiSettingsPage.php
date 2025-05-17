@@ -6,12 +6,14 @@
  * @package ChatAI
  */
 
+declare( strict_types=1 );
+
 namespace ChatAi\Admin;
 
 use ChatAi\Contracts\Initializable;
 use ChatAi\Contracts\SettingsPageInterface;
 
-class ChatAISettingsPage implements Initializable, SettingsPageInterface {
+class ChatAiSettingsPage implements Initializable, SettingsPageInterface {
 
 	public function add_settings_page(): void {
 		add_menu_page(

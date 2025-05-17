@@ -2,7 +2,7 @@
 
 namespace ChatAi\Config;
 
-use ChatAi\Admin\ChatAISettingsPage;
+use ChatAi\Admin\ChatAiSettingsPage;
 use ChatAi\Providers\SettingsPageServiceProvider;
 
 use function DI\autowire;
@@ -13,7 +13,7 @@ return [
 	SettingsPageServiceProvider::class =>
 		autowire()->constructor(
 			[
-				get( ChatAISettingsPage::class )
+				get( ChatAiSettingsPage::class )
 			] ),
 
 ];

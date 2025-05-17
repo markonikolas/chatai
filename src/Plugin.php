@@ -1,6 +1,8 @@
 <?php
 
-namespace ChatAI;
+declare( strict_types=1 );
+
+namespace ChatAi;
 
 use ChatAi\Providers\SettingsPageServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
