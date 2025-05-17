@@ -13,7 +13,8 @@
  * Domain Path:       /languages
  */
 
-use ChatAI\ChatAI;
+use ChatAI\Bootstrap\Container;
+use ChatAI\Bootstrap\Plugin;
 
 if (!defined('ABSPATH')) {
 	exit;
@@ -21,5 +22,6 @@ if (!defined('ABSPATH')) {
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$plugin = new ChatAI();
+$container = new Container();
+$plugin = new Plugin($container);
 $plugin->boot();

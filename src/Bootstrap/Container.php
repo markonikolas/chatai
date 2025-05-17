@@ -30,6 +30,10 @@ class Container implements ContainerInterface {
 		return $this->auto_resolve($id);
 	}
 
+	public function has(string $id): bool {
+		return isset($this->instances[$id]);
+	}
+
 	/**
 	 * Throws on:
 	 *  - Missing class
