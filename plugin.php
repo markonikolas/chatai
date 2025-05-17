@@ -1,6 +1,6 @@
 <?php
 /*
- * Plugin Name:       Plugin Boilerplate
+ * Plugin Name:       ChatAI
  * Description:       Plugin boilerplate description.
  * Version:           0.0.1
  * Requires at least: 6.4
@@ -13,10 +13,13 @@
  * Domain Path:       /languages
  */
 
-use Tests\Unit\SampleTest;
+use ChatAI\ChatAI;
 
 if (!defined('ABSPATH')) {
 	exit;
 }
 
-new SampleTest();
+require_once __DIR__ . '/vendor/autoload.php';
+
+$plugin = new ChatAI();
+$plugin->boot();

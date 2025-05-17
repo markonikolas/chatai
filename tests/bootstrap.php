@@ -2,10 +2,10 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package Plugin Boilerplate
+ * @package ChatAI
  */
 
-namespace PluginBoilerplate\Tests;
+namespace Chatai\Tests;
 
 use function Yoast\WPTestUtils\WPIntegration\get_path_to_wp_test_dir;
 use function Yoast\WPTestUtils\WPIntegration\bootstrap_it;

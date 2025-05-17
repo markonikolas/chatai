@@ -15,7 +15,8 @@
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.47",
 		"wordpress/wordpress": "^6.8",
-		"yoast/wp-test-utils": "^1.2"
+		"yoast/wp-test-utils": "^1.2",
+		"brain/monkey": "^2.6"
 	},
 	"repositories": [
 		{
@@ -36,13 +37,13 @@
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-4": {
-			"PluginBoilerplate\\": "src/"
+			"ChatAI\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
 			"Tests\\": "tests/",
-			"Tests\\Unit": "tests/unit/"
+			"Tests\\Unit\\": "tests/unit/"
 		}
 	},
 	"config": {
@@ -51,6 +52,6 @@
 		}
 	},
 	"scripts": {
-		"test:unit": "phpunit --testsuite='unit' --testdox"
+		"test:unit": "./vendor/bin/phpunit --testsuite='unit' --testdox"
 	}
 }

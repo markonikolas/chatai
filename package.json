@@ -11,10 +11,12 @@
   },
   "scripts": {
 		"wp-env": "wp-env",
-		"composer": "wp-env run cli --env-cwd=wp-content/plugins/$(basename \"$PWD\") composer",
-		"test:setup": "yarn wp-env start",
-		"test:teardown": "yarn wp-env stop",
-		"test:unit": "yarn test:setup && yarn test:php:unit ; yarn test:teardown",
-		"test:php:unit": "yarn composer test:unit"
+		"start": "wp-env start",
+		"stop": "wp-env stop",
+		"composer": "yarn start composer",
+		"test:setup": "yarn wp-env run --env-cwd=wp-content/plugins/$(basename \"$PWD\") tests-cli",
+		"test:unit:base": "yarn test:setup composer test:unit",
+		"test:teardown": "yarn stop",
+		"test:unit": "yarn start && yarn test:unit:base ; yarn test:teardown"
   }
 }
