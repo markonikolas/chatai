@@ -15,4 +15,5 @@ return [
 			[
 				get( ChatAISettingsPage::class )
 			] ),
+
 ];
