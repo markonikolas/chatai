@@ -36,7 +36,7 @@ class ChatAISettingsPage implements Initializable, SettingsPageInterface {
 		add_settings_section(
 			'chatai_settings_section',
 			'API Key Configuration',
-			null,
+			fn() => null,
 			'chatai-settings-page'
 		);
 
