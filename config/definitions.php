@@ -3,14 +3,14 @@
 namespace ChatAI\Config;
 
 use ChatAI\Admin\ChatAISettingsPage;
-use ChatAI\Providers\SettingsPageProvider;
+use ChatAI\Providers\SettingsPageServiceProvider;
 
 use function DI\autowire;
 use function DI\get;
 
 return [
 
-	SettingsPageProvider::class =>
+	SettingsPageServiceProvider::class =>
 		autowire()->constructor(
 			[
 				get( ChatAISettingsPage::class )

@@ -2,7 +2,7 @@
 
 namespace ChatAI;
 
-use ChatAI\Providers\SettingsPageProvider;
+use ChatAI\Providers\SettingsPageServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -17,7 +17,7 @@ class Plugin {
 		$this->container = $container;
 
 		$this->providers = [
-			SettingsPageProvider::class,
+			SettingsPageServiceProvider::class,
 		];
 	}
 
