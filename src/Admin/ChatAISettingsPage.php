@@ -1,7 +1,6 @@
 <?php
 /**
- * SettingsPage class.
- *
+ * ChatAISettingsPage class.
  * Handles creation of a settings page.
  *
  * @package ChatAI
@@ -10,8 +9,9 @@
 namespace ChatAI\Admin;
 
 use ChatAI\Contracts\Initializable;
+use ChatAI\Contracts\SettingsPageInterface;
 
-class SettingsPage implements Initializable {
+class ChatAISettingsPage implements Initializable, SettingsPageInterface {
 
 	public function add_settings_page(): void {
 		add_menu_page(
@@ -19,10 +19,15 @@ class SettingsPage implements Initializable {
 			'Chat AI',
 			'manage_options',
 			'chatai-settings',
-			[ $this, 'render_settings_page' ],
+			[ $this, 'render' ],
 			'dashicons-admin-generic',
 			80
 		);
+	}
+
+	public function api_key_input_callback(): void {
+		$api_key = get_option( 'chatai_api_key', '' );
+		echo '<input type="text" name="chatai_api_key" value="' . esc_attr( $api_key ) . '" class="regular-text">';
 	}
 
 	public function register_settings(): void {
@@ -44,15 +49,11 @@ class SettingsPage implements Initializable {
 		);
 	}
 
-	public function api_key_input_callback(): void {
-		$api_key = get_option( 'chatai_api_key', '' );
-		echo '<input type="text" name="chatai_api_key" value="' . esc_attr( $api_key ) . '" class="regular-text">';
-	}
-
-	public function render_settings_page(): void {
+	public function render(): void {
 		?>
 		<div class="wrap">
-			<h1><?php _e( 'ChatAI Settings', 'chatai' ); ?></h1>
+			<h1><?php
+				_e( 'ChatAI Settings', 'chatai' ); ?></h1>
 			<form method="post" action="options.php">
 				<?php
 				settings_fields( 'chatai_settings_group' );

@@ -2,15 +2,21 @@
 
 namespace ChatAI\Providers;
 
-use ChatAI\Admin\SettingsPage;
+use ChatAI\Contracts\SettingsPageInterface;
 use ChatAI\Contracts\ProviderInterface;
 
-class SettingsPageProvider implements ProviderInterface
-{
+class SettingsPageProvider implements ProviderInterface {
+	protected array $settings_pages;
 
-    public function initialize(): void
-    {
-			$settings_page = new SettingsPage();
-			$settings_page->initialize();
-    }
+	public function __construct( array $settings_pages ) {
+		$this->settings_pages = $settings_pages;
+	}
+
+	public function initialize(): void {
+		foreach ( $this->settings_pages as $settings_page ) {
+			if ( $settings_page instanceof SettingsPageInterface ) {
+				$settings_page->initialize();
+			}
+		}
+	}
 }

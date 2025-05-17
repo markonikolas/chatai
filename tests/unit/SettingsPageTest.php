@@ -7,17 +7,16 @@
 
 namespace Tests\Unit;
 
-use ChatAI\Admin\SettingsPage;
+use ChatAI\Admin\ChatAISettingsPage;
 use PHPUnit\Framework\TestCase;
 
-class SettingsPageTest extends TestCase
-{
-	protected SettingsPage $settings_page;
+class SettingsPageTest extends TestCase {
+	protected ChatAISettingsPage $settings_page;
 
 	protected function setUp(): void {
 		parent::setUp();
 
-		$this->settings_page = new SettingsPage();
+		$this->settings_page = new ChatAISettingsPage();
 	}
 
 	public function test_initialize_does_not_throw(): void {

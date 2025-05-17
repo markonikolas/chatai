@@ -13,15 +13,34 @@
  * Domain Path:       /languages
  */
 
-use ChatAI\Bootstrap\Container;
-use ChatAI\Bootstrap\Plugin;
+use ChatAI\Plugin;
+use DI\ContainerBuilder;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+try {
+	require_once __DIR__ . '/vendor/autoload.php';
 
-$container = new Container();
-$plugin = new Plugin($container);
-$plugin->boot();
+	$definitions = require_once __DIR__ . '/config/definitions.php';
+
+	$builder = new ContainerBuilder();
+	$builder->useAutowiring( true );
+	$builder->addDefinitions( $definitions );
+
+	$container = $builder->build();
+	$plugin    = new Plugin( $container );
+
+	add_action( 'plugins_loaded', function () use ( $plugin ) {
+		$plugin->boot();
+	} );
+} catch ( NotFoundExceptionInterface $e ) {
+	error_log( 'Service not found: ' . $e->getMessage() );
+} catch ( ContainerExceptionInterface $e ) {
+	error_log( 'Container error: ' . $e->getMessage() );
+} catch ( Exception $e ) {
+	error_log( 'Generic error: ' . $e->getMessage() );
+}
