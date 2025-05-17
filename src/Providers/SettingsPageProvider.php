@@ -3,9 +3,9 @@
 namespace ChatAI\Providers;
 
 use ChatAI\Admin\SettingsPage;
-use ChatAI\Contracts\Initializable;
+use ChatAI\Contracts\ProviderInterface;
 
-class SettingsPageProvider implements Initializable
+class SettingsPageProvider implements ProviderInterface
 {
 
     public function initialize(): void
