@@ -16,7 +16,6 @@ class Plugin {
 	public function __construct( ContainerInterface $container ) {
 		$this->container = $container;
 
-
 		$this->providers = [
 			SettingsPageProvider::class,
 		];
