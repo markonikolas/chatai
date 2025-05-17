@@ -5,12 +5,12 @@
  * @package ChatAI
  */
 
-namespace Chatai\Tests;
+namespace ChatAi\Tests;
 
 use function Yoast\WPTestUtils\WPIntegration\get_path_to_wp_test_dir;
 use function Yoast\WPTestUtils\WPIntegration\bootstrap_it;
 
-require_once dirname(__DIR__) . '/vendor/yoast/wp-test-utils/src/WPIntegration/bootstrap-functions.php';
+require_once dirname( __DIR__ ) . '/vendor/yoast/wp-test-utils/src/WPIntegration/bootstrap-functions.php';
 
 $_tests_dir = get_path_to_wp_test_dir();
 
@@ -23,10 +23,11 @@ require_once $_tests_dir . 'includes/functions.php';
 function _manually_load_plugin(): void {
 	require __DIR__ . '/../plugin.php';
 }
-tests_add_filter('muplugins_loaded', __NAMESPACE__ . '\_manually_load_plugin');
 
-if ($_tests_dir === '/usr/src/vendor/wordpress') {
-	define('WP_TESTS_CONFIG_FILE_PATH', __DIR__ . '/../tests/integration/wp-tests-config.php');
+tests_add_filter( 'muplugins_loaded', __NAMESPACE__ . '\_manually_load_plugin' );
+
+if ( $_tests_dir === '/usr/src/vendor/wordpress' ) {
+	define( 'WP_TESTS_CONFIG_FILE_PATH', __DIR__ . '/../tests/integration/wp-tests-config.php' );
 }
 
 /*

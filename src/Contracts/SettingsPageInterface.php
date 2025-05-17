@@ -1,6 +1,6 @@
 <?php
 
-namespace ChatAI\Contracts;
+namespace ChatAi\Contracts;
 
 interface SettingsPageInterface {
 

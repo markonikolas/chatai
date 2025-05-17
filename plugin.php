@@ -13,7 +13,7 @@
  * Domain Path:       /languages
  */
 
-use ChatAI\Plugin;
+use ChatAi\Plugin;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;

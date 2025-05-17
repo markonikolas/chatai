@@ -1,9 +1,9 @@
 <?php
 
-namespace ChatAI\Providers;
+namespace ChatAi\Providers;
 
-use ChatAI\Contracts\SettingsPageInterface;
-use ChatAI\Contracts\ProviderInterface;
+use ChatAi\Contracts\SettingsPageInterface;
+use ChatAi\Contracts\ProviderInterface;
 
 class SettingsPageServiceProvider implements ProviderInterface {
 	protected array $settings_pages;

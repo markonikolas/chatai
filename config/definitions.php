@@ -1,9 +1,9 @@
 <?php
 
-namespace ChatAI\Config;
+namespace ChatAi\Config;
 
-use ChatAI\Admin\ChatAISettingsPage;
-use ChatAI\Providers\SettingsPageServiceProvider;
+use ChatAi\Admin\ChatAISettingsPage;
+use ChatAi\Providers\SettingsPageServiceProvider;
 
 use function DI\autowire;
 use function DI\get;

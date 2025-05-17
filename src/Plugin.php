@@ -2,7 +2,7 @@
 
 namespace ChatAI;
 
-use ChatAI\Providers\SettingsPageServiceProvider;
+use ChatAi\Providers\SettingsPageServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;

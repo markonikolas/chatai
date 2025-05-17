@@ -6,10 +6,10 @@
  * @package ChatAI
  */
 
-namespace ChatAI\Admin;
+namespace ChatAi\Admin;
 
-use ChatAI\Contracts\Initializable;
-use ChatAI\Contracts\SettingsPageInterface;
+use ChatAi\Contracts\Initializable;
+use ChatAi\Contracts\SettingsPageInterface;
 
 class ChatAISettingsPage implements Initializable, SettingsPageInterface {
 

@@ -1,5 +1,5 @@
 <?php
 
-namespace ChatAI\Contracts;
+namespace ChatAi\Contracts;
 
-interface ProviderInterface extends Initializable {}
+interface ProviderInterface extends Initializable { }
