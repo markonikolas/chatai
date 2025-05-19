@@ -30,5 +30,8 @@
 		"test:unit:base": "yarn test:setup composer test:unit",
 		"test:teardown": "yarn env:stop",
 		"test:unit": "yarn env:start && yarn test:unit:base ; yarn test:teardown"
+	},
+	"dependencies": {
+		"@wordpress/element": "^6.23.0"
 	}
 }

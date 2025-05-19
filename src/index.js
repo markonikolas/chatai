@@ -1,6 +1,13 @@
-function log() {
+import {createRoot, createElement} from '@wordpress/element';
+import ChatBubble from "./components/ChatBubble";
 
-	console.log('Hello there!');
-}
+document.addEventListener('DOMContentLoaded', () => {
+	document.body.innerHTML = '<div id="app"></div>';
 
-window.addEventListener('DOMContentLoaded', log)
+	const target = document.getElementById('app');
+
+	if (target) {
+		const root = createRoot(target);
+		root.render(<ChatBubble/>);
+	}
+})

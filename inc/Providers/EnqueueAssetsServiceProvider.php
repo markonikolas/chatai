@@ -20,5 +20,8 @@ class EnqueueAssetsServiceProvider implements ProviderInterface {
 
 	public function initialize(): void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue' ] );
+		add_action( 'wp_footer', function () {
+			echo '<div id="chatai-input"></div>';
+		} );
 	}
 }
