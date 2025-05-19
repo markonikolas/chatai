@@ -4,6 +4,7 @@ declare( strict_types=1 );
 
 namespace ChatAi;
 
+use ChatAi\Providers\RestApiServiceProvider;
 use ChatAi\Providers\SettingsPageServiceProvider;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
@@ -20,6 +21,7 @@ class Plugin {
 
 		$this->providers = [
 			SettingsPageServiceProvider::class,
+			RestApiServiceProvider::class,
 		];
 	}
 
