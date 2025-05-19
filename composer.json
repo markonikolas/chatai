@@ -38,7 +38,7 @@
 	"minimum-stability": "stable",
 	"autoload": {
 		"psr-4": {
-			"ChatAi\\": "src/"
+			"ChatAi\\": "inc/"
 		}
 	},
 	"autoload-dev": {

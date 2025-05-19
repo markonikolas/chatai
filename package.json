@@ -1,22 +1,34 @@
 {
-  "name": "plugin-boilerplate",
-  "version": "0.0.1",
-  "main": "index.js",
-  "keywords": [],
-  "author": "Marko Nikolaš",
-  "license": "GPL-2.0-only",
-  "description": "Plugin boilerplate description.",
-  "devDependencies": {
-		"@wordpress/env": "^10.23.0"
-  },
-  "scripts": {
+	"name": "plugin-boilerplate",
+	"version": "0.0.1",
+	"main": "index.js",
+	"keywords": [],
+	"author": "Marko Nikolaš",
+	"license": "GPL-2.0-only",
+	"description": "Plugin boilerplate description.",
+	"devDependencies": {
+		"@wordpress/env": "^10.23.0",
+		"@wordpress/scripts": "^30.16.0"
+	},
+	"scripts": {
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start",
 		"wp-env": "wp-env",
-		"start": "wp-env start",
-		"stop": "wp-env stop",
-		"composer": "yarn start composer",
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"composer": "yarn env:start composer",
 		"test:setup": "yarn wp-env run --env-cwd=wp-content/plugins/$(basename \"$PWD\") tests-cli",
 		"test:unit:base": "yarn test:setup composer test:unit",
-		"test:teardown": "yarn stop",
-		"test:unit": "yarn start && yarn test:unit:base ; yarn test:teardown"
-  }
+		"test:teardown": "yarn env:stop",
+		"test:unit": "yarn env:start && yarn test:unit:base ; yarn test:teardown"
+	}
 }
