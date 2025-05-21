@@ -16,8 +16,7 @@
 	"require-dev": {
 		"ergebnis/composer-normalize": "^2.47",
 		"wordpress/wordpress": "^6.8",
-		"yoast/wp-test-utils": "^1.2",
-		"brain/monkey": "^2.6"
+		"yoast/wp-test-utils": "^1.2"
 	},
 	"repositories": [
 		{
