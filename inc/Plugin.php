@@ -4,9 +4,9 @@ declare( strict_types=1 );
 
 namespace ChatAi;
 
-use ChatAi\Providers\EnqueueAssetsServiceProvider;
+use ChatAi\Providers\Enqueuer;
 use ChatAi\Providers\RestApiServiceProvider;
-use ChatAi\Providers\SettingsPageServiceProvider;
+use ChatAi\Providers\SettingsPage;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -21,8 +21,8 @@ class Plugin {
 		$this->container = $container;
 
 		$this->providers = [
-			SettingsPageServiceProvider::class,
-			EnqueueAssetsServiceProvider::class
+			SettingsPage::class,
+			Enqueuer::class
 		];
 	}
 
@@ -34,8 +34,8 @@ class Plugin {
 		foreach ( $this->providers as $providerClass ) {
 			$provider = $this->container->get( $providerClass );
 
-			if ( method_exists( $provider, 'initialize' ) ) {
-				$provider->initialize();
+			if ( method_exists( $provider, 'register' ) ) {
+				$provider->register();
 			}
 		}
 	}

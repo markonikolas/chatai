@@ -8,12 +8,11 @@
 
 declare( strict_types=1 );
 
-namespace ChatAi\Admin;
+namespace ChatAi\Services\Admin\Pages;
 
-use ChatAi\Contracts\Initializable;
-use ChatAi\Contracts\SettingsPageInterface;
+use ChatAi\Contracts\Renderable;
 
-class ChatAiSettingsPage implements Initializable, SettingsPageInterface {
+class ChatAiSettingsPage implements Renderable {
 
 	public function add_settings_page(): void {
 		add_menu_page(
@@ -67,7 +66,7 @@ class ChatAiSettingsPage implements Initializable, SettingsPageInterface {
 		<?php
 	}
 
-	public function initialize(): void {
+	public function register(): void {
 		add_action( 'admin_menu', [ $this, 'add_settings_page' ] );
 		add_action( 'admin_init', [ $this, 'register_settings' ] );
 	}
