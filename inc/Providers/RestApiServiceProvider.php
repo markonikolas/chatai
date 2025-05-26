@@ -2,7 +2,7 @@
 
 namespace ChatAi\Providers;
 
-use ChatAi\Contracts\ProviderInterface;
+use ChatAi\Contracts\Initializable;
 use ChatAi\Services\ChatGptService;
 use Throwable;
 use WP_Error;
@@ -10,7 +10,7 @@ use WP_HTTP_Response;
 use WP_REST_Request;
 use WP_REST_Response;
 
-class RestApiServiceProvider implements ProviderInterface {
+class RestApiServiceProvider implements Initializable {
 
 	protected ChatGptService $chat_gpt_service;
 

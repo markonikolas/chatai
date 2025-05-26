@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 try {
 	require_once __DIR__ . '/vendor/autoload.php';
 
-	$definitions = require_once __DIR__ . '/inc/Config/definitions.php';
+	$definitions = require_once __DIR__ . '/config/definitions.php';
 
 	$builder = new ContainerBuilder();
 	$builder->useAutowiring( true );

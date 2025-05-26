@@ -5,9 +5,9 @@ declare( strict_types=1 );
 namespace ChatAi\Providers;
 
 use ChatAi\Contracts\SettingsPageInterface;
-use ChatAi\Contracts\ProviderInterface;
+use ChatAi\Contracts\Initializable;
 
-class SettingsPageServiceProvider implements ProviderInterface {
+class SettingsPageServiceProvider implements Initializable {
 	protected array $settings_pages;
 
 	public function __construct( array $settings_pages ) {

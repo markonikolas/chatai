@@ -2,9 +2,9 @@
 
 namespace ChatAi\Providers;
 
-use ChatAi\Contracts\ProviderInterface;
+use ChatAi\Contracts\Initializable;
 
-class EnqueueAssetsServiceProvider implements ProviderInterface {
+class EnqueueAssetsServiceProvider implements Initializable {
 
 	public function enqueue(): void {
 		$asset_file = require_once dirname( __DIR__, 2 ) . '/build/index.asset.php';
