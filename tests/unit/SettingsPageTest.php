@@ -7,7 +7,7 @@
 
 namespace Tests\Unit;
 
-use ChatAi\Services\Admin\Pages\ChatAiSettingsPage;
+use ChatAi\Pages\ChatAiSettingsPage;
 use PHPUnit\Framework\TestCase;
 
 class SettingsPageTest extends TestCase {

@@ -8,7 +8,7 @@
 
 declare( strict_types=1 );
 
-namespace ChatAi\Services\Admin\Pages;
+namespace ChatAi\Pages;
 
 use ChatAi\Contracts\Renderable;
 
