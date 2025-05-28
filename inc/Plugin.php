@@ -22,7 +22,8 @@ class Plugin {
 
 		$this->providers = [
 			SettingsPage::class,
-			Enqueuer::class
+			Enqueuer::class,
+			RestApiServiceProvider::class,
 		];
 	}
 
