@@ -9,14 +9,17 @@ use ChatAi\Contracts\Registrable;
 class Enqueuer implements Registrable {
 
 	public function enqueue(): void {
-		$asset_file = require_once dirname( __DIR__, 2 ) . '/build/index.asset.php';
-		$file       = plugin_dir_url( dirname( __DIR__ ) ) . '/build/index.js';
+		$file     = plugin_dir_url( dirname( __DIR__ ) ) . '/build/index.js';
+		$handle   = 'chatai-main';
+		$metadata = require_once dirname( __DIR__, 2 ) . '/build/index.asset.php';
+
+		[ 'dependencies' => $dependencies, 'version' => $version ] = $metadata;
 
 		wp_enqueue_script(
-			'chatai-main',
+			$handle,
 			$file,
-			$asset_file['dependencies'],
-			$asset_file['version']
+			$dependencies,
+			$version
 		);
 	}
 

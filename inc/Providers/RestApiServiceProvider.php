@@ -3,7 +3,7 @@
 namespace ChatAi\Providers;
 
 use ChatAi\Contracts\Registrable;
-use ChatAi\Services\ChatGptService;
+use ChatAi\Services\ChatGPT;
 use Throwable;
 use WP_Error;
 use WP_HTTP_Response;
@@ -12,17 +12,13 @@ use WP_REST_Response;
 
 class RestApiServiceProvider implements Registrable {
 
-	protected ChatGptService $chat_gpt_service;
-
 	const string namespace = '/chatai';
 
 	const string version = '/v1';
 
 	const string endpoint = '/ask';
 
-	public function __construct( ChatGptService $chat_gpt_service ) {
-		$this->chat_gpt_service = $chat_gpt_service;
-	}
+	public function __construct( protected ChatGPT $chat_gpt_service ) { }
 
 	public function register(): void {
 		add_action( 'rest_api_init', [ $this, 'register_routes' ] );

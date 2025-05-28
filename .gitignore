@@ -9,3 +9,6 @@ node_modules
 # generated
 .phpunit.result.cache
 build
+
+# secrets
+.env
