@@ -1,0 +1,14 @@
+# IDE
+.idea
+.vscode
+
+# vendor
+vendor
+node_modules
+
+# generated
+.phpunit.result.cache
+build
+
+# secrets
+.env
