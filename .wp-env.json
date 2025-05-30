@@ -1,5 +1,10 @@
 {
-  "core": "WordPress/WordPress#6.8",
-  "phpVersion": "8.3",
-  "plugins": ["."]
+	"core": "WordPress/WordPress#6.8",
+	"phpVersion": "8.3",
+	"plugins": [
+		"."
+	],
+	"config": {
+		"DISABLE_CRON": "false"
+	}
 }

@@ -8,11 +8,7 @@ use ChatAi\Contracts\Registrable;
 use ChatAi\Contracts\Renderable;
 
 class SettingsPage implements Registrable {
-	protected array $settings_pages;
-
-	public function __construct( array $settings_pages ) {
-		$this->settings_pages = $settings_pages;
-	}
+	public function __construct( protected array $settings_pages ) { }
 
 	public function register(): void {
 		foreach ( $this->settings_pages as $settings_page ) {

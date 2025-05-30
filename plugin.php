@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name:       ChatAI
- * Description:       Plugin boilerplate description.
+ * Description:       An AI Chat bot that answers questions based on your sites content.
  * Version:           0.0.1
  * Requires at least: 6.4
  * Requires PHP:      8.3
@@ -9,7 +9,7 @@
  * Author URI:        https://github.com/markonikolas
  * License:           GPL v2
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       plugin-boilerplate
+ * Text Domain:       chatai
  * Domain Path:       /languages
  */
 
@@ -22,6 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+const __CHATAI_PLUGIN_FILE__ = __FILE__;
+
 try {
 	require_once __DIR__ . '/vendor/autoload.php';
 
@@ -32,7 +34,9 @@ try {
 	$builder->addDefinitions( $definitions );
 
 	$container = $builder->build();
-	$plugin    = new Plugin( $container );
+	$plugin    = $container->get( Plugin::class );
+
+	$plugin->register_lifecycle_hooks();
 
 	add_action( 'plugins_loaded', function () use ( $plugin ) {
 		$plugin->boot();
