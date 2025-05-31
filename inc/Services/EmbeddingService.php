@@ -6,23 +6,22 @@ use ChatAi\Repository\EmbeddingRepository;
 use ChatAi\Repository\PageRepository;
 
 readonly class EmbeddingService {
-
 	public function __construct(
-		private PageRepository $page_repository,
-		private EmbeddingRepository $embedding_repository
+		private PageRepository $pageRepository,
+		private EmbeddingRepository $embeddingRepository
 	) {
 	}
 
 	public function create_column( string $column = 'embedding' ): void {
-		$this->embedding_repository->create_column( table_name: 'wp_posts', column: $column );
+		$this->embeddingRepository->create_column( table_name: 'wp_posts', column: $column );
 	}
 
 	public function create_embeddings(): void {
-		$pages = $this->page_repository->get_raw_data();
+		$pages = $this->pageRepository->get_raw_data();
 
 		foreach ( $pages as $page ) {
 			$clean = $this->clean_text( $page->post_content );
-			$this->embedding_repository->update_clean_text( $page->ID, $clean );
+			$this->embeddingRepository->update_clean_text( $page->ID, $clean );
 		}
 	}
 
@@ -35,12 +34,12 @@ readonly class EmbeddingService {
 	}
 
 	public function register_cron(): void {
-		if ( ! wp_next_scheduled( 'chatai_cron_hook' ) ) {
-			wp_schedule_event( time(), 'every_10_minutes', 'chatai_cron_hook' );
+		if ( ! wp_next_scheduled( 'chatai_create_embeddings' ) ) {
+			wp_schedule_event( time(), 'hourly', 'chatai_create_embeddings' );
 		}
 	}
 
 	public function unregister_cron(): void {
-		wp_unschedule_event( time(), 'chatai_cron_hook' );
+		wp_unschedule_event( time(), 'chatai_create_embeddings' );
 	}
 }

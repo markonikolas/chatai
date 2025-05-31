@@ -19,7 +19,7 @@ final readonly class Plugin {
 
 	public function __construct(
 		private ContainerInterface $container,
-		private EmbeddingController $embedding_controller
+		private EmbeddingController $embeddingController
 	) {
 		$this->providers = [
 			SettingsPage::class,
@@ -70,13 +70,12 @@ final readonly class Plugin {
 
 	public function register_lifecycle_hooks(): void {
 		register_activation_hook( __CHATAI_PLUGIN_FILE__, [ $this, 'init_cron' ] );
-//		register_uninstall_hook( __CHATAI_PLUGIN_FILE__, [ self::class, 'uninstall' ] );
-//		register_deactivation_hook( __CHATAI_PLUGIN_FILE__, [ $this->embedding_controller, 'unregister_cron' ] );
+		register_uninstall_hook( __CHATAI_PLUGIN_FILE__, [ self::class, 'uninstall' ] );
+		register_deactivation_hook( __CHATAI_PLUGIN_FILE__, [ $this->embeddingController, 'unregister_cron' ] );
 	}
 
 	public function init_cron(): void {
-		$this->embedding_controller->register_cron();
-		$this->embedding_controller->create_column();
+		$this->embeddingController->register_cron();
+		$this->embeddingController->create_column();
 	}
-
 }
