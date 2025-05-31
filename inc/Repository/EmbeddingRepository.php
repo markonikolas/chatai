@@ -28,4 +28,18 @@ readonly class EmbeddingRepository {
 	private function check_colum_exists( string $table_name, string $column ): array|object {
 		return $this->wpdb->get_results( "SHOW COLUMNS FROM `$table_name` LIKE '$column'" );
 	}
+
+	public function update_clean_text( $post_id, $text ): void {
+		global $wpdb;
+
+		$wpdb->update(
+			$wpdb->prefix . 'posts',
+			[ 'clean_text' => $text ],
+			[ 'ID' => $post_id ],
+			[ '%s' ],
+			[ '%d' ]
+		);
+
+		update_post_meta( $post_id, '_clean_text_processed', 1 );
+	}
 }

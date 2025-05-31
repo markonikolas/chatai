@@ -2,13 +2,13 @@
 
 namespace ChatAi\Services;
 
-use ChatAi\Repository\Pages as PagesRepository;
+use ChatAi\Repository\PageRepository;
 
-class Pages {
+class PageService {
 
 	public function __construct(
-		protected PagesRepository $repository,
-		protected Search $search_service
+		protected PageRepository $repository,
+		protected SearchService $search_service
 	) {
 	}
 

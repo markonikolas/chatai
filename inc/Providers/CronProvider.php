@@ -3,14 +3,16 @@
 namespace ChatAi\Providers;
 
 use ChatAi\Contracts\Registrable;
+use ChatAi\Controllers\EmbeddingController;
 
 readonly class CronProvider implements Registrable {
 
-	public function __construct() { }
+	public function __construct( private EmbeddingController $embedding_controller ) { }
 
 	public function register(): void {
 		add_filter( 'cron_schedules', [ $this, 'register_cron_schedules' ] );
-		add_action( 'chatai_cron_hook', [ $this, 'run_embeddings_cron' ] );
+
+		add_action( 'chatai_cron_hook', [ $this->embedding_controller, 'create_embeddings' ] );
 	}
 
 	public function register_cron_schedules(): array {

@@ -2,7 +2,7 @@
 
 namespace ChatAi\Services;
 
-class Search {
+class SearchService {
 
 	public function cosine_similarity( $vecA, $vecB ): float|int {
 		$dotProduct = 0.0;
