@@ -2,9 +2,9 @@
 
 namespace ChatAi\Config;
 
+use ChatAi\Contracts\Storable;
 use ChatAi\Pages\ChatAiSettingsPage;
 use ChatAi\Providers\SettingsPage;
-use ChatAi\Repository\EmbeddingRepository;
 
 use function DI\autowire;
 use function DI\get;
@@ -18,5 +18,5 @@ return [
 				get( ChatAiSettingsPage::class )
 			] ),
 
-	EmbeddingRepository::class => autowire()->constructor( $wpdb ),
+	Storable::class => autowire()->constructor( $wpdb ),
 ];

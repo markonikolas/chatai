@@ -17,7 +17,7 @@ readonly class EmbeddingService {
 	}
 
 	public function create_embeddings(): void {
-		$pages = $this->pageRepository->get_raw_data();
+		$pages = $this->pageRepository->get_all();
 
 		foreach ( $pages as $page ) {
 			$clean = $this->clean_text( $page->post_content );

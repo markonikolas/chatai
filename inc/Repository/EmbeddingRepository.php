@@ -2,10 +2,11 @@
 
 namespace ChatAi\Repository;
 
+use ChatAi\Contracts\Storable;
 use Exception;
 use wpdb;
 
-readonly class EmbeddingRepository {
+readonly class EmbeddingRepository implements Storable {
 
 	public function __construct( private wpdb $wpdb ) { }
 
@@ -41,5 +42,10 @@ readonly class EmbeddingRepository {
 		);
 
 		update_post_meta( $post_id, '_clean_text_processed', 1 );
+	}
+
+	public function get_all( array $args = [] ): array {
+		// TODO: Get data from Embedding column for use in vector search.
+		return [];
 	}
 }

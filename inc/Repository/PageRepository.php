@@ -2,13 +2,13 @@
 
 namespace ChatAi\Repository;
 
-use PDO;
+use ChatAi\Contracts\Storable;
 
-class PageRepository {
+class PageRepository implements Storable {
 
 	public function __construct() { }
 
-	public function get_raw_data( array $args = [] ): array {
+	public function get_all( array $args = [] ): array {
 		if ( empty( $args ) ) {
 			$args = [
 				'post_type'      => 'page',
@@ -24,12 +24,5 @@ class PageRepository {
 		}
 
 		return get_posts( $args );
-	}
-
-	public function get_all( string $db_path ): array {
-		$pdo  = new PDO( 'sqlite:' . $db_path );
-		$stmt = $pdo->query( 'SELECT id, heading, content, embedding FROM content WHERE embedding IS NOT NULL' );
-
-		return $stmt->fetchAll( PDO::FETCH_ASSOC );
 	}
 }
