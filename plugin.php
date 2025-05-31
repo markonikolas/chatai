@@ -13,6 +13,7 @@
  * Domain Path:       /languages
  */
 
+use ChatAi\Controllers\EmbeddingController;
 use ChatAi\Plugin;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerExceptionInterface;
@@ -36,11 +37,9 @@ try {
 	$container = $builder->build();
 	$plugin    = $container->get( Plugin::class );
 
+	$embeddingController = $container->get( EmbeddingController::class );
 	$plugin->register_lifecycle_hooks();
-
-	add_action( 'plugins_loaded', function () use ( $plugin ) {
-		$plugin->boot();
-	} );
+	$plugin->boot();
 } catch ( NotFoundExceptionInterface $e ) {
 	error_log( 'Service not found: ' . $e->getMessage() );
 } catch ( ContainerExceptionInterface $e ) {
