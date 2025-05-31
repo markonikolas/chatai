@@ -2,34 +2,20 @@
 
 namespace ChatAi\Repository;
 
-use PDO;
+use ChatAi\Contracts\Readable;
+use ChatAi\Contracts\Storable;
+use ChatAi\Traits\Storable as StorableTrait;
 
-class PageRepository {
+class PageRepository implements Readable, Storable {
+	use StorableTrait;
 
-	public function __construct() { }
-
-	public function get_raw_data( array $args = [] ): array {
-		if ( empty( $args ) ) {
-			$args = [
-				'post_type'      => 'page',
-				'posts_per_page' => 10,
-				'post_status'    => 'publish',
-				'meta_query'     => [
-					[
-						'key'     => '_clean_text_processed',
-						'compare' => 'NOT EXISTS',
-					],
-				],
-			];
-		}
+	public function getAll( array $args = [] ): array {
+		$args = wp_parse_args( $args, [
+			'post_type'      => 'page',
+			'posts_per_page' => - 1,
+			'post_status'    => 'publish',
+		] );
 
 		return get_posts( $args );
-	}
-
-	public function get_all( string $db_path ): array {
-		$pdo  = new PDO( 'sqlite:' . $db_path );
-		$stmt = $pdo->query( 'SELECT id, heading, content, embedding FROM content WHERE embedding IS NOT NULL' );
-
-		return $stmt->fetchAll( PDO::FETCH_ASSOC );
 	}
 }

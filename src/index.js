@@ -1,5 +1,5 @@
-import {createRoot, createElement} from '@wordpress/element';
-import ChatBubble from "./components/ChatBubble";
+import {createRoot} from '@wordpress/element';
+import ChatBubble from "./components/ChatBubble.jsx";
 
 document.addEventListener('DOMContentLoaded', () => {
 	document.body.innerHTML = '<div id="app"></div>';

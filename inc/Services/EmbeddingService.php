@@ -12,20 +12,35 @@ readonly class EmbeddingService {
 	) {
 	}
 
-	public function create_column( string $column = 'embedding' ): void {
-		$this->embeddingRepository->create_column( table_name: 'wp_posts', column: $column );
+	/**
+	 * Needs to be called statically to trigger
+	 * the register_uninstall_hook.
+	 *
+	 * @see register_uninstall_hook()
+	 */
+	public static function cleanup(): void {
+		EmbeddingRepository::cleanup();
 	}
 
-	public function create_embeddings(): void {
-		$pages = $this->pageRepository->get_raw_data();
+	public function createColumns(): void {
+		$this->embeddingRepository->createColumns( table_name: 'wp_posts' );
+	}
+
+	public function createEmbeddings(): void {
+		$pages = $this->pageRepository->getAll();
 
 		foreach ( $pages as $page ) {
-			$clean = $this->clean_text( $page->post_content );
-			$this->embeddingRepository->update_clean_text( $page->ID, $clean );
+			$clean_text  = $this->cleanText( $page->post_content );
+			$new_hash    = md5( $clean_text );
+			$stored_hash = $this->embeddingRepository->getStoredHash( $page->ID );
+
+			if ( $new_hash !== $stored_hash ) {
+				$this->embeddingRepository->updateCleanText( $page->ID, $clean_text, $new_hash );
+			}
 		}
 	}
 
-	protected function clean_text( $html ): string {
+	protected function cleanText( $html ): string {
 		$html = apply_filters( 'the_content', $html );
 		$html = preg_replace( '/<!--\s*\/?wp:[^>]*-->/', '', $html );
 		$text = wp_strip_all_tags( $html );
@@ -33,13 +48,13 @@ readonly class EmbeddingService {
 		return trim( preg_replace( '/\s+/', ' ', html_entity_decode( $text, ENT_QUOTES, 'UTF-8' ) ) );
 	}
 
-	public function register_cron(): void {
+	public function registerEvent(): void {
 		if ( ! wp_next_scheduled( 'chatai_create_embeddings' ) ) {
 			wp_schedule_event( time(), 'hourly', 'chatai_create_embeddings' );
 		}
 	}
 
-	public function unregister_cron(): void {
-		wp_unschedule_event( time(), 'chatai_create_embeddings' );
+	public function unregisterEvent(): void {
+		wp_clear_scheduled_hook( 'chatai_create_embeddings' );
 	}
 }

@@ -13,7 +13,7 @@ class PageService {
 	}
 
 	public function get_top_results( $query_embedding, $db_path, $limit = 3 ): string {
-		$rows = $this->repository->get_all( $db_path );
+		$rows = $this->repository->getAll( $db_path );
 
 		foreach ( $rows as $row ) {
 			$embedding = json_decode( $row['embedding'], true );

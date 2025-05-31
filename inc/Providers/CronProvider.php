@@ -3,19 +3,34 @@
 namespace ChatAi\Providers;
 
 use ChatAi\Contracts\Registrable;
-use ChatAi\Controllers\EmbeddingController;
+use ChatAi\Services\EmbeddingService;
 
 readonly class CronProvider implements Registrable {
 
-	public function __construct( private EmbeddingController $embedding_controller ) { }
+	public function __construct( private EmbeddingService $embeddingService ) { }
 
-	public function register(): void {
-		add_filter( 'cron_schedules', [ $this, 'register_cron_schedules' ] );
-
-		add_action( 'chatai_cron_hook', [ $this->embedding_controller, 'create_embeddings' ] );
+	public static function uninstall(): void {
+		EmbeddingService::cleanup();
 	}
 
-	public function register_cron_schedules(): array {
+	public function register(): void {
+		add_filter( 'cron_schedules', [ $this, 'registerSchedules' ] );
+	}
+
+	public function runEvent(): void {
+		$this->embeddingService->createEmbeddings();
+	}
+
+	public function registerEvents(): void {
+		$this->embeddingService->createColumns();
+		$this->embeddingService->registerEvent();
+	}
+
+	public function unregisterEvents(): void {
+		$this->embeddingService->unregisterEvent();
+	}
+
+	public function registerSchedules(): array {
 		$minute_in_seconds = 60;
 
 		$chatai_schedule = [
@@ -55,6 +70,6 @@ readonly class CronProvider implements Registrable {
 			];
 		}
 
-		return $schedules;
+		return apply_filters( 'chatai_cron_schedules', $schedules );
 	}
 }

@@ -13,8 +13,8 @@
  * Domain Path:       /languages
  */
 
-use ChatAi\Controllers\EmbeddingController;
 use ChatAi\Plugin;
+use ChatAi\Providers\CronProvider;
 use DI\ContainerBuilder;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -34,10 +34,12 @@ try {
 	$builder->useAutowiring( true );
 	$builder->addDefinitions( $definitions );
 
-	$container = $builder->build();
-	$plugin    = $container->get( Plugin::class );
+	$container    = $builder->build();
+	$plugin       = $container->get( Plugin::class );
+	$cronProvider = $container->get( CronProvider::class );
 
-	$embeddingController = $container->get( EmbeddingController::class );
+	add_action( 'chatai_create_embeddings', [ $cronProvider, 'runEvent' ] );
+
 	$plugin->register_lifecycle_hooks();
 	$plugin->boot();
 } catch ( NotFoundExceptionInterface $e ) {

@@ -12,7 +12,7 @@ use WP_REST_Response;
 
 class RestApiServiceProvider implements Registrable {
 
-	const string namespace = '/chatai';
+	const string namespace = 'chatai';
 
 	const string version = '/v1';
 
